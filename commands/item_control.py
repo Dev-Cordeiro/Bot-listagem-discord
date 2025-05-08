@@ -35,6 +35,7 @@ class ItemControl(commands.Cog):
             self._initialized = True
 
     async def _reenvia_todas_listas(self):
+        total = 0
         for guild in self.bot.guilds:
             guild_id = guild.id
             for row in supabase.table("lists")\
@@ -607,7 +608,6 @@ class ItemControl(commands.Cog):
         self._check_permission(interaction)
         guild_id = interaction.guild.id
         await interaction.response.defer()
-
         total = 0
         for row in supabase.table("lists")\
                            .select("channel_id,list_name,message_id")\
