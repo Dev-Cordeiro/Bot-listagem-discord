@@ -644,11 +644,12 @@ class ItemControl(commands.Cog):
            
             if msg_id:
                 try:
-                    msg = await self._safe_get_message(channel, msg_id)                   
-                    await msg.edit(embed=embed)
-                    total += 1
-                    continue
-                except discord.NotFound:
+                    msg = await self._safe_get_message(channel, msg_id)
+                    if msg:
+                        await msg.edit(embed=embed)
+                        total += 1
+                        continue
+                except Exception:
                     pass
 
             msg = await channel.send(embed=embed)
